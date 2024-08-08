@@ -1,0 +1,24 @@
+package com.example.library.models;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+
+import com.example.library.entities.Book;
+import com.example.library.entities.Patron;
+
+import lombok.Data;
+
+@Data
+public class BorrowResModel implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1930700869082309739L;
+	
+	private LocalDate borrowDate;
+	private LocalDate returnDate;
+	private Book borrowedBook;
+	private Patron patronData;
+}

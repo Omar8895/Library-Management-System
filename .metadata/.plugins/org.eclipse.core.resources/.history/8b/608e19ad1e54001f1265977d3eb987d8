@@ -1,0 +1,7 @@
+package com.example.library.exceptions;
+
+import java.io.Serializable;
+
+public class BusinessLogicViolationException extends RuntimeException implements Serializable {
+
+}

@@ -1,0 +1,25 @@
+1722968471062	Delete element
+1722968707711	Delete element
+1722968712943	Delete element
+1723051075819	Delete element
+1723055184326	Delete element
+1723057687811	Move compilation unit
+1723058396306	Copy package
+1723058403245	Move compilation unit
+1723058412935	Delete element
+1723058425644	Move compilation unit
+1723101650515	Copy package
+1723101666859	Delete element
+1723105086418	Rename package 'com.example.library.booktest'
+1723105117286	Move compilation unit
+1723105364905	Rename type 'BorrowingRecord'
+1723105501160	Rename package 'com.example.library.repositorey'
+1723105511441	Rename type 'BookRepositorey'
+1723105520872	Rename type 'BorrowingRecordRepositorey'
+1723105526261	Rename type 'PatronRepositorey'
+1723105533917	Rename type 'UserRepositorey'
+1723109931961	Move compilation units
+1723110080231	Rename package 'com.example.library.serviceImple'
+1723110602530	Delete element
+1723110650390	Delete element
+1723110675555	Rename type 'ExecutionTimeAspect'

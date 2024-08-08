@@ -1,0 +1,23 @@
+package com.example.library.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.library.models.PatronsResModel;
+import com.example.library.repositorey.PatronRepositorey;
+
+@Service
+public class PatronserviceImpl implements PatronService{
+	
+	@Autowired
+	private PatronRepositorey patronRepositorey;
+
+	@Override
+	public List<PatronsResModel> getAllPatrons() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

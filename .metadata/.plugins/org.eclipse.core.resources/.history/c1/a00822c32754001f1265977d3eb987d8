@@ -1,0 +1,8 @@
+package com.example.library.repositorey;
+
+import org.springframework.data.repository.CrudRepository;
+
+
+public interface PatronRepositorey extends CrudRepository<Patron, Integer> {
+
+}

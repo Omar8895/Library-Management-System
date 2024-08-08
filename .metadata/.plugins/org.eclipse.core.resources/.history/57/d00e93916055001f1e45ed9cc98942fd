@@ -1,0 +1,35 @@
+package com.example.library.test.record;
+
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.example.library.repository.BookRepository;
+import com.example.library.repository.BorrowingRecordRepository;
+import com.example.library.repository.PatronRepository;
+import com.example.library.service.BookServiceImpl;
+import com.example.library.service.BorrowingRecordServiceImpl;
+import com.example.library.service.PatronServiceImpl;
+
+@ExtendWith(MockitoExtension.class)
+public class BorrowingRecordTest {
+
+	@InjectMocks
+    private BookServiceImpl bookService;
+
+    @Mock
+    private BookRepository bookRepository;
+
+    @InjectMocks
+    private PatronServiceImpl patronService;
+    
+    @Mock
+    private PatronRepository patronRepository;
+    
+	@InjectMocks
+	private BorrowingRecordServiceImpl BorrowingRecordService;
+
+	@Mock
+	private BorrowingRecordRepository borrowingRecordRepository;
+}

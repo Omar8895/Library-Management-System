@@ -1,0 +1,17 @@
+package com.example.library.repositorey;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.library.entities.BorrowingRecords;
+
+@Repository
+public interface BorrowingRecordRepositorey extends CrudRepository<BorrowingRecords, Integer> {
+
+	@Query(value="Select b from BorrowingRecords b where b.borrowedBook = ?1 and ?2 > b.returnDate")
+	List<BorrowingRecords>findByBookIdAndDates(Integer bookId , LocalDate borrowDate);
+}

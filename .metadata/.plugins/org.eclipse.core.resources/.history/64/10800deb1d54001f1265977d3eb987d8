@@ -1,0 +1,16 @@
+package com.example.library.service;
+
+import java.util.List;
+
+import com.example.library.models.BookReqModel;
+import com.example.library.models.BookResModel;
+
+public interface BookService {
+	
+	List<BookResModel>getAllBooks();
+	
+	Integer createBook(BookReqModel bookReqModel);
+	
+	BookResModel getBookById(Integer id);
+
+}

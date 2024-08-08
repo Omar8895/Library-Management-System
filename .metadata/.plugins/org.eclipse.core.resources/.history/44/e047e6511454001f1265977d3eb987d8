@@ -1,0 +1,40 @@
+package com.example.library.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.library.entities.Book;
+import com.example.library.models.BookResModel;
+import com.example.library.repositorey.BookRepositorey;
+
+@Service
+public class BookServiceImpl implements BookService {
+
+	@Autowired
+	private BookRepositorey bookRepositorey;
+	
+	@Override
+	public List<BookResModel> getAllBooks() {
+	
+		List<BookResModel>bookResModels = new ArrayList<>();
+		List<Book> allBooks = bookRepositorey.findAllBooks();
+		allBooks.forEach(book ->{
+			
+			bookResModels.add(mapBookToBookResModel(book));
+		});
+		
+		return bookResModels;
+	}
+	
+	public void mapBookToBookResModel(Book book) {
+		BookResModel bookResModel = new BookResModel();
+		bookResModel.setAuthor(book.getAuthor());
+		bookResModel.setTitle(book.getTitle());
+		bookResModel.setPublicationYear(book.getPublicationYear());
+		bookResModel.setIsbn(book.getIsbn());
+	}
+
+}

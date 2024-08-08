@@ -1,0 +1,6 @@
+package com.example.library.entities;
+
+public enum Role {
+
+	USER , ADMIN
+}

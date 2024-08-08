@@ -1,0 +1,24 @@
+package com.example.library;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.library.entities.Book;
+import com.example.library.models.BookResModel;
+import com.example.library.service.BookService;
+
+@SpringBootTest
+class LibraryMangementSystemApplicationTests {
+
+	@Autowired
+	private BookService bookService;
+	
+	@Test
+	void getBookByIdNotFoundTest() {
+		
+		BookResModel bookResModel = bookService.getBookById(1);
+		assertEquals(false , bookResModel.)
+	}
+
+}

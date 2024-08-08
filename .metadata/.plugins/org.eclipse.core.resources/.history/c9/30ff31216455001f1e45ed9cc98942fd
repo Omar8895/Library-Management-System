@@ -1,0 +1,6 @@
+package com.example.library.aop;
+
+public class ExecutionTimeAspect {
+
+	@Around("excution(* com.example.library.service.*.*(..))")
+}

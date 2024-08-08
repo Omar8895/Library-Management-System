@@ -1,0 +1,17 @@
+package com.example.library.repositorey;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.library.entities.Patron;
+
+@Repository
+public interface PatronRepositorey extends CrudRepository<Patron, Integer> {
+	
+	@Query(value="Select p From Patron p")
+	public List<Patron> findAllPatrons();
+
+}

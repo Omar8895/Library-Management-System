@@ -1,0 +1,15 @@
+package com.example.library.repositorey;
+
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import com.example.library.entities.Patron;
+
+
+public interface PatronRepositorey extends JpaRepository<Patron, Integer> {
+	
+
+
+}

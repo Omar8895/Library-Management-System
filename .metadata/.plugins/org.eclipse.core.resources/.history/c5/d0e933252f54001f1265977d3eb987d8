@@ -1,0 +1,17 @@
+package com.example.library.helper;
+
+import com.example.library.entities.Book;
+import com.example.library.models.BookResModel;
+
+public class Helper {
+
+public BookResModel mapToBookResModel(Book book) {
+		
+		BookResModel bookResModel = new BookResModel();
+		bookResModel.setAuthor(book.getAuthor());
+		bookResModel.setTitle(book.getTitle());
+		bookResModel.setPublicationYear(book.getPublicationYear());
+		bookResModel.setIsbn(book.getIsbn());
+		return bookResModel;
+	}
+}

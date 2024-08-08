@@ -1,0 +1,76 @@
+package com.example.library.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.example.library.entities.Book;
+import com.example.library.exceptions.BusinessLogicViolationException;
+import com.example.library.models.BookReqModel;
+import com.example.library.models.BookResModel;
+import com.example.library.repositorey.BookRepositorey;
+
+@Service
+public class BookServiceImpl implements BookService {
+
+	@Autowired
+	private BookRepositorey bookRepositorey;
+	
+	@Override
+	public List<BookResModel> getAllBooks() {
+	
+		List<BookResModel>bookResModels = new ArrayList<>();
+		List<Book> allBooks = bookRepositorey.findAllBooks();
+		allBooks.forEach(book ->{
+			
+			bookResModels.add(mapToBookResModel(book));
+		});
+		
+		return bookResModels;
+	}
+	
+	public BookResModel mapToBookResModel(Book book) {
+		BookResModel bookResModel = new BookResModel();
+		bookResModel.setAuthor(book.getAuthor());
+		bookResModel.setTitle(book.getTitle());
+		bookResModel.setPublicationYear(book.getPublicationYear());
+		bookResModel.setIsbn(book.getIsbn());
+		return bookResModel;
+	}
+
+	@Override
+	public Integer createBook(BookReqModel bookReqModel) {
+		
+		return bookRepositorey.save(mapToBookReqModel(bookReqModel)).getId();
+
+	}
+	
+	public Book mapToBookReqModel(BookReqModel bookReqModel) {
+		
+		Book newBook = new Book();
+		newBook.setAuthor(bookReqModel.getAuthor());
+		newBook.setTitle(bookReqModel.getTitle());
+		newBook.setPublicationYear(bookReqModel.getPublicationYear());
+		newBook.setIsbn(bookReqModel.getIsbn());
+		return newBook ;
+	}
+
+	@Override
+	public BookResModel getBookById(Integer id) {
+		
+		Book book = bookRepositorey.findById(id).orElseThrow(()->  new BusinessLogicViolationException("Book not found"));
+		return mapToBookResModel(book);	
+	}
+
+	@Override
+	public BookResModel updateBook(Integer id, BookReqModel bookReqModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

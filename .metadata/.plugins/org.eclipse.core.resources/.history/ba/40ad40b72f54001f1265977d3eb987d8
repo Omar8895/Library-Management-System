@@ -1,0 +1,90 @@
+package com.example.library.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.library.entities.Patron;
+import com.example.library.exceptions.BusinessLogicViolationException;
+import com.example.library.models.PatronsReqModel;
+import com.example.library.models.PatronsResModel;
+import com.example.library.repositorey.PatronRepositorey;
+
+@Service
+public class PatronserviceImpl implements PatronService{
+	
+	@Autowired
+	private PatronRepositorey patronRepositorey;
+
+	@Override
+	public List<PatronsResModel> getAllPatrons() {
+		
+		List<PatronsResModel>patronResModels = new ArrayList<>();
+		List<Patron> allPatrons = patronRepositorey.findAllPatrons();
+		allPatrons.forEach(patron ->{
+			
+			patronResModels.add(mapToPatronsResModel(patron));
+		});
+		
+		return patronResModels;
+
+	}
+	
+	public PatronsResModel mapToPatronsResModel(Patron patron) {
+		
+		PatronsResModel patronResModel = new PatronsResModel();
+		patronResModel.setName(patron.getName());
+		patronResModel.setMobile(patron.getMobile());
+		patronResModel.setEmail(patron.getEmail());
+		return patronResModel;
+	}
+
+	@Override
+	@Transactional
+	public Integer createPatron(PatronsReqModel patronReqModel) {
+		
+		return patronRepositorey.save(mapToPatronsReqModel(patronReqModel)).getId();
+	}
+	
+	public Patron mapToPatronsReqModel(PatronsReqModel patronReqModel) {
+		
+		Patron newPatron = new Patron();
+		newPatron.setName(patronReqModel.getName());
+		newPatron.setMobile(patronReqModel.getMobile());
+		newPatron.setEmail(patronReqModel.getEmail());
+		return newPatron ;
+	}
+
+	@Override
+	public PatronsResModel getPatronById(Integer id) {		
+		
+		Patron patron = patronRepositorey.findById(id).orElseThrow(()->  new BusinessLogicViolationException("PATRON NOT FOUND"));
+		return mapToPatronsResModel(patron);	
+	}
+	
+	public void setDataToPatron(Patron patron, PatronsReqModel patronsReqModel ) {
+		
+		patron.setName(patronsReqModel.getName());
+		patron.setMobile(patronsReqModel.getMobile());
+		patron.setEmail(patronsReqModel.getEmail());
+	}
+
+	@Override
+	@Transactional
+	public PatronsResModel updatePatron(Integer id, PatronsReqModel patronsReqModel) {
+		
+		Patron patron = patronRepositorey.findById(id).orElseThrow(()->  new BusinessLogicViolationException("PATRON NOT FOUND"));
+		setDataToPatron(patron,patronsReqModel);
+		patronRepositorey.save(patron);
+		return mapToPatronsResModel(patron);
+	}
+
+	@Override
+	public void deletePatron(Integer id) {
+		
+		patronRepositorey.delete(patronRepositorey.findById(id).orElseThrow(()-> new BusinessLogicViolationException("PATRON NOT FOUND")));
+	}
+
+}

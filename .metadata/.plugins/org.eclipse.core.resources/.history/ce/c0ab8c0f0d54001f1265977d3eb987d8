@@ -1,0 +1,8 @@
+package com.example.library.models;
+
+import java.io.Serializable;
+
+public class BookResModel implements Serializable{
+	
+
+}

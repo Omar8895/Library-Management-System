@@ -1,0 +1,29 @@
+package com.example.library.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.library.models.BorrowReqModel;
+import com.example.library.repositorey.BookRepositorey;
+import com.example.library.repositorey.BorrowingRecordRepositorey;
+import com.example.library.repositorey.PatronRepositorey;
+
+@Service
+public class BorrowingRecordServiceImpl implements BorrowingRecordService{
+
+	@Autowired
+	private BorrowingRecordRepositorey borrowingRecordRepositorey;
+	
+	@Autowired
+	private BookRepositorey bookRepositorey;
+	
+	@Autowired
+	private PatronRepositorey patronRepositorey;
+	
+	@Override
+	public Integer createBookBorrowigRecord(BorrowReqModel borrowReqModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

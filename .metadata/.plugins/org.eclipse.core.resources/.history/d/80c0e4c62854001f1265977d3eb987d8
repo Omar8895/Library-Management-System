@@ -1,0 +1,9 @@
+package com.example.library.service;
+
+import com.example.library.models.PatronsResModel;
+
+public interface PatronService {
+	
+	PatronsResModel getAllPatrons();
+
+}

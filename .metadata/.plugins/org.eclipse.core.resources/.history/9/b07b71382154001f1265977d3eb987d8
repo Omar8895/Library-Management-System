@@ -1,0 +1,19 @@
+package com.example.library.exceptions;
+
+import java.io.Serializable;
+
+import lombok.Data;
+
+@Data
+public class ErrorResModel implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8160269665903526003L;
+	
+	private int code;
+	private String message;
+
+
+}

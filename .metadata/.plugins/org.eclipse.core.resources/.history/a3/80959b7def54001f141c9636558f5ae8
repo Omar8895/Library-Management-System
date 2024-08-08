@@ -1,0 +1,16 @@
+package com.example.library.entities;
+
+import java.io.Serializable;
+
+public class User implements Serializable{
+
+	private int id;
+	
+	private String firstName;
+	
+	private String LastName;
+	
+	private String email;
+	
+	private String password;
+}

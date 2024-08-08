@@ -1,0 +1,28 @@
+package com.example.library.models;
+
+import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import lombok.Data;
+
+@Data
+public class PatronsReqModel implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5840161471396147626L;
+	
+	@NotBlank
+	@Size(max = 50)
+	private String name;
+
+	@NotBlank
+	@Size(max = 50)
+	private String mobile;
+
+	@NotBlank
+	@Size(max = 50)
+	private String mail ;
+
+}

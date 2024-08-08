@@ -1,0 +1,9 @@
+package com.example.library.aop;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@EnableAspectAutoProxy
+public class AopConfig {
+
+}

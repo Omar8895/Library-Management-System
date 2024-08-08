@@ -1,0 +1,66 @@
+package com.example.library.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.library.entities.Patron;
+import com.example.library.exceptions.BusinessLogicViolationException;
+import com.example.library.helper.Helper;
+import com.example.library.models.PatronsReqModel;
+import com.example.library.models.PatronsResModel;
+import com.example.library.repositorey.PatronRepositorey;
+
+@Service
+public class PatronserviceImpl implements PatronService{
+	
+	@Autowired
+	private PatronRepositorey patronRepositorey;
+
+	@Override
+	public List<PatronsResModel> getAllPatrons() {
+		
+		List<Patron> allPatrons = patronRepositorey.findAllPatrons();
+		return allPatrons.stream().map(p -> Helper.mapToPatronsResModel(p)).collect(Collectors.toList());
+		
+	}
+	
+	
+
+	@Override
+	@Transactional
+	public Integer createPatron(PatronsReqModel patronReqModel) {
+		
+		return patronRepositorey.save(Helper.mapToPatronsReqModel(patronReqModel)).getId();
+	}
+	
+	
+
+	@Override
+	public PatronsResModel getPatronById(Integer id) {		
+		
+		Patron patron = patronRepositorey.findById(id).orElseThrow(()->  new BusinessLogicViolationException("PATRON NOT FOUND"));
+		return Helper.mapToPatronsResModel(patron);	
+	}
+	
+	
+	@Override
+	@Transactional
+	public PatronsResModel updatePatron(Integer id, PatronsReqModel patronsReqModel) {
+		
+		Patron patron = patronRepositorey.findById(id).orElseThrow(()->  new BusinessLogicViolationException("PATRON NOT FOUND"));
+		Helper.setDataToPatron(patron,patronsReqModel);
+		patronRepositorey.save(patron);
+		return Helper.mapToPatronsResModel(patron);
+	}
+
+	@Override
+	public void deletePatron(Integer id) {
+		
+		patronRepositorey.delete(patronRepositorey.findById(id).orElseThrow(()-> new BusinessLogicViolationException("PATRON NOT FOUND")));
+	}
+
+}

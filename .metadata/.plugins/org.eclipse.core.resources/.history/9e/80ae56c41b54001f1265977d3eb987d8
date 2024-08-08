@@ -1,0 +1,54 @@
+package com.example.library.entities;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@Table(name = "book", uniqueConstraints = {
+		@UniqueConstraint(name = "U_Isbn", columnNames = { "isbn"})
+public class Book implements Serializable{/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5605238167836088689L;
+	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(nullable = false , length = 50)
+	private String author;
+	
+	@Column(nullable = false , length = 50)
+	private String title;
+	
+	@Column(nullable = false)
+	private LocalDate publicationYear ;
+	
+	@Column(nullable = false , length = 50)
+	private String isbn ;
+	
+	@OneToMany(mappedBy = "borrowedBook")
+	List<BorrowingRecords> borrowingRecord;
+	
+	
+	public Book (int id) {
+		this.id = id;
+	}
+	
+
+}

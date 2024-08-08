@@ -1,0 +1,45 @@
+package com.example.library;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.example.library.exceptions.BusinessLogicViolationException;
+import com.example.library.models.BookResModel;
+import com.example.library.repositorey.BookRepositorey;
+import com.example.library.service.BookService;
+
+
+@ExtendWith(MockitoExtension.class)
+class LibraryMangementSystemApplicationTests {
+
+	@InjectMocks
+	private BookService bookService;
+	
+	@Mock
+	private BookRepositorey bookRepositorey;
+	
+	@Test
+	void getBookByIdNotFoundTest() {
+		
+		int bookId = 1;
+		
+		when(bookRepositorey.findById(bookId)).thenReturn(Optional.empty());
+		//BookResModel bookResModel = bookService.getBookById(BookId);
+		
+		assertThrows(BusinessLogicViolationException.class, () -> {
+            bookService.getBookById(bookId);
+        });
+
+	}
+
+}

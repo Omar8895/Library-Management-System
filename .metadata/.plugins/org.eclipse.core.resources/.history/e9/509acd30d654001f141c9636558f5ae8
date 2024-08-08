@@ -1,0 +1,16 @@
+package com.example.library.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.library.models.BorrowReqModel;
+
+@Service
+public class BorrowingRecordServiceImpl implements BorrowingRecordService{
+
+	@Override
+	public Integer createBookBorrowigRecord(BorrowReqModel borrowReqModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

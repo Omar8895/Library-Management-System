@@ -1,0 +1,8 @@
+package com.example.library.service;
+
+import com.example.library.models.BorrowReqModel;
+
+public interface BorrowingRecordService {
+
+	Integer createBookBorrowigRecord(Integer bookId , Integer patronId , BorrowReqModel borrowReqModel);
+}

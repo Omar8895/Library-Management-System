@@ -1,0 +1,22 @@
+package com.example.library.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+public class Patron implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4440073156665842949L;
+	
+	private 
+
+}

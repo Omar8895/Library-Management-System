@@ -1,0 +1,30 @@
+package com.example.library.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.library.models.AuthenticationResModel;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+public class AuthenticationController {
+	
+	@PostMapping("/register")
+	public ResponseEntity<AuthenticationResModel> register(
+			@RequestBody RegisterReqModel request){
+		
+	}
+	
+	
+	@PostMapping("/authenticate")
+	public ResponseEntity<AuthenticationResModel> register(
+			@RequestBody AuthenticationRequest request){
+		
+	}
+
+}

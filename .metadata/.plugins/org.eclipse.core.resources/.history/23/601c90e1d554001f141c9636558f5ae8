@@ -1,0 +1,28 @@
+package com.example.library.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.library.models.BookReqModel;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@RestController
+@RequestMapping(path="/api/borrow")
+public class BorrowingRecordsController {
+	
+	@ApiOperation("Create New Book Borrowing Recoed")
+	@PostMapping
+	public ResponseEntity<Integer> createBookBorrowigRecord(
+			@ApiParam("Book Req Model") @Valid @RequestBody BorrowReqModel borrowReqModel) {
+		return new ResponseEntity<>(bookService.createBookBorrowigRecord(borrowReqModel), HttpStatus.OK);
+	}
+
+}

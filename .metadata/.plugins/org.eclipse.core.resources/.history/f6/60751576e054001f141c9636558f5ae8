@@ -1,0 +1,73 @@
+package com.example.library.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.library.entities.Book;
+import com.example.library.entities.BorrowingRecords;
+import com.example.library.entities.Patron;
+import com.example.library.exceptions.BusinessLogicViolationException;
+import com.example.library.models.BorrowReqModel;
+import com.example.library.models.BorrowResModel;
+import com.example.library.models.ReturnReqModel;
+import com.example.library.repositorey.BookRepositorey;
+import com.example.library.repositorey.BorrowingRecordRepositorey;
+import com.example.library.repositorey.PatronRepositorey;
+
+@Service
+public class BorrowingRecordServiceImpl implements BorrowingRecordService{
+
+	@Autowired
+	private BorrowingRecordRepositorey borrowingRecordRepositorey;
+	
+	@Autowired
+	private BookRepositorey bookRepositorey;
+	
+	@Autowired
+	private PatronRepositorey patronRepositorey;
+	
+	@Override
+	@Transactional
+	public Integer createBookBorrowigRecord(Integer bookId , Integer patronId , BorrowReqModel borrowReqModel) {
+		
+		Book book = bookRepositorey.findById(bookId).orElseThrow(()->  new BusinessLogicViolationException("BOOK NOT FOUND"));
+		Patron patron = patronRepositorey.findById(patronId).orElseThrow(()->  new BusinessLogicViolationException("PATRON NOT FOUND"));
+		return borrowingRecordRepositorey.save(mapToBorrowingRecords(borrowReqModel , book , patron)).getId();
+
+	}
+	
+	public BorrowingRecords mapToBorrowingRecords(BorrowReqModel borrowReqModel ,Book book , Patron patron) {
+		
+		BorrowingRecords borrowingRecord = new BorrowingRecords();
+		borrowingRecord.setBorrowDate(borrowReqModel.getBorrowDate());
+		borrowingRecord.setBorrowedBook(book);
+		borrowingRecord.setPatronData(patron);
+		return borrowingRecord;
+	}
+
+	@Override
+	@Transactional
+	public void createBookReturnRecord(Integer bookId, Integer patronId, ReturnReqModel returnReqModel) {
+		
+		BorrowResModel borrowResModel = new BorrowResModel();
+		Book book = bookRepositorey.findById(bookId).orElseThrow(()->  new BusinessLogicViolationException("BOOK NOT FOUND"));
+		Patron patron = patronRepositorey.findById(patronId).orElseThrow(()->  new BusinessLogicViolationException("PATRON NOT FOUND"));
+		
+		BorrowingRecords oldRecord = borrowingRecordRepositorey.findByBookIdAndPatronId(bookId, patronId);
+		
+		if(oldRecord == null) {
+			throw new BusinessLogicViolationException("RECORD NOT FOUND");
+		}else {
+			
+			oldRecord.setReturnDate(returnReqModel.getReturnDate());
+			borrowingRecordRepositorey.save(oldRecord);
+	
+		}
+	}
+	
+	
+	
+}
